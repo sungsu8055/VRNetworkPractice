@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -12,41 +12,41 @@ public class ConnManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.GameVersion = "0.1";
 
-        // °ÔÀÓ¿¡¼­ »ç¿ëÇÒ »ç¿ëÀÚÀÇ ÀÌ¸§À» ·£´ıÀ¸·Î ¼³Á¤
+        // ê²Œì„ì—ì„œ ì‚¬ìš©í•  ì‚¬ìš©ìì˜ ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ì„¤ì •
         int num = Random.Range(0, 1000);
         PhotonNetwork.NickName = "Player" + num;
 
-        // °ÔÀÓ Âü¿© ½Ã ¸¶½ºÅÍ Å¬¶óÀÌ¾ğÆ®°¡ ±¸¼ºÇÑ ¾À¿¡ ÀÚµ¿ µ¿±âÈ­
+        // ê²Œì„ ì°¸ì—¬ ì‹œ ë§ˆìŠ¤í„° í´ë¼ì´ì–¸íŠ¸ê°€ êµ¬ì„±í•œ ì”¬ì— ìë™ ë™ê¸°í™”
         PhotonNetwork.AutomaticallySyncScene = true;
 
-        // ¼³Á¤¿¡ µû¶ó ³×ÀÓ ¼­¹ö·Î Á¢¼Ó ÈÄ ¸¶½ºÅÍ ¼­¹ö ÀÚµ¿ Á¢¼Ó
+        // ì„¤ì •ì— ë”°ë¼ ë„¤ì„ ì„œë²„ë¡œ ì ‘ì† í›„ ë§ˆìŠ¤í„° ì„œë²„ ìë™ ì ‘ì†
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public override void OnConnectedToMaster()  // ¸¶½ºÅÍ ¼­¹ö Á¢¼Ó ½Ã ÀÛµ¿
+    public override void OnConnectedToMaster()  // ë§ˆìŠ¤í„° ì„œë²„ ì ‘ì† ì‹œ ì‘ë™
     {
-        PhotonNetwork.JoinLobby(TypedLobby.Default);    // ·Îºñ·Î ¿¬°á
+        PhotonNetwork.JoinLobby(TypedLobby.Default);    // ë¡œë¹„ë¡œ ì—°ê²°
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("·Îºñ Á¢¼Ó ¿Ï·á!");
-        RoomOptions ro = new RoomOptions() // ¹æ »ı¼º ¿É¼Ç
+        Debug.Log("ë¡œë¹„ ì ‘ì† ì™„ë£Œ!");
+        RoomOptions ro = new RoomOptions() // ë°© ìƒì„± ì˜µì…˜
         {
-            IsVisible = true, // ·Îºñ ¹æ ¸ñ·Ï¿¡ Ãâ·Â
-            IsOpen = true,  // »ç¿ëÀÚµéÀÌ ¹æ¿¡ µé¾î¿Ã ¼ö ÀÖ´ÂÁö ¿©ºÎ
-            MaxPlayers = 8, // ÃÖ´ë Çã¿ë ÀÎ¿ø ¼ö
+            IsVisible = true, // ë¡œë¹„ ë°© ëª©ë¡ì— ì¶œë ¥
+            IsOpen = true,  // ì‚¬ìš©ìë“¤ì´ ë°©ì— ë“¤ì–´ì˜¬ ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€
+            MaxPlayers = 8, // ìµœëŒ€ í—ˆìš© ì¸ì› ìˆ˜
         };
-        PhotonNetwork.JoinOrCreateRoom("NetTest", ro, TypedLobby.Default); // µé¾î°¥ ¹æÀÌ ¾øÀ¸¸é ¹æ »ı¼º
+        PhotonNetwork.JoinOrCreateRoom("NetTest", ro, TypedLobby.Default); // ë“¤ì–´ê°ˆ ë°©ì´ ì—†ìœ¼ë©´ ë°© ìƒì„±
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("·ë ÀÔÀå!");
+        Debug.Log("ë£¸ ì…ì¥!");
 
-        // ¹İ°æ 2m ÀÌ³»¿¡ Player ÇÁ¸®ÆÕÀ» »ı¼ºÇÑ´Ù
+        // ë°˜ê²½ 2m ì´ë‚´ì— Player í”„ë¦¬íŒ¹ì„ ìƒì„±í•œë‹¤
         Vector2 originPos = Random.insideUnitCircle * 2.0f;
-        // ÆÄ¶ó¹ÌÅÍ °ª Prefab, Position, Rotation / Quaternion.identity´Â È¸Àü°ªÀÌ ¾øÀ½, ¿ùµå ÁÂÇ¥ ÃàÀÌ³ª ºÎ¸ğ °´Ã¼ ÃàÀ¸·Î Á¤·ÄµÊ
+        // íŒŒë¼ë¯¸í„° ê°’ Prefab, Position, Rotation / Quaternion.identityëŠ” íšŒì „ê°’ì´ ì—†ìŒ, ì›”ë“œ ì¢Œí‘œ ì¶•ì´ë‚˜ ë¶€ëª¨ ê°ì²´ ì¶•ìœ¼ë¡œ ì •ë ¬ë¨
         PhotonNetwork.Instantiate("Player", new Vector3(originPos.x, 0, originPos.y), Quaternion.identity);
     }
 
